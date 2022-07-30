@@ -1,0 +1,41 @@
+<h1 class="mt-4">Dashboard</h1>
+<p class="lead mb-3">Welcome <%= user.name %></p>
+<a href="/users/logout" class="btn btn-secondary">Logout</a>
+
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <%= include ("./partials/messages"); %>
+      <h4>Balance : <%= user.walletBalance %> RWF</h4>
+      <div class="py-2">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">Send Money</h5>
+          </div>
+          <div class="card-body">
+            <form action="/send?_method=PUT" method="POST">
+              <div class="form-group">
+                <label for="users">User</label>
+                <select name="user" id="users" class="form-control" required>
+                  <% allUsers.forEach(function(u) { %>
+                  <option value="<%=u._id%>"><%= u.name %></option>
+                  <% }); %>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Amount</label>
+                <input
+                  type="number"
+                  required
+                  name="amount"
+                  class="form-control"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">Send</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
